@@ -21,7 +21,13 @@ const ResponseItem = ({ response }) => {
         </Grid.Col>
 
         <Grid.Col span={9}>
-          <pre style={{ marginTop: 0 }}>
+          <pre
+            style={{
+              marginTop: 0,
+              whiteSpace: "pre-wrap",
+              wordWrap: "break-word",
+            }}
+          >
             <Text>{response.response.trim()}</Text>
           </pre>
         </Grid.Col>

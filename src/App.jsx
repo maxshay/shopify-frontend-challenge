@@ -2,6 +2,7 @@ import { Suspense, lazy } from "react";
 import { Routes, Route, Outlet } from "react-router-dom";
 
 import { GTP3ContextProvider } from "./context/GPT3Context";
+import { Text } from "@mantine/core";
 
 // atoms
 import Spinner from "./components/atoms/Spinner";
@@ -9,6 +10,7 @@ import Spinner from "./components/atoms/Spinner";
 // pages
 const DashboardPage = lazy(() => import("./pages/DashboardPage.jsx"));
 const NotFoundPage = lazy(() => import("./pages/404NotFoundPage.jsx"));
+const WelcomePage = lazy(() => import("./pages/WelcomePage.jsx"));
 
 // views (smaller pages)
 const SearchView = lazy(() => import("./views/SearchView.jsx"));
@@ -20,10 +22,6 @@ const Layout = () => {
       <Outlet />
     </>
   );
-};
-
-const WelcomePage = () => {
-  return <p>Welcome</p>;
 };
 
 const App = () => {
@@ -38,7 +36,15 @@ const App = () => {
 
               {/* Dash Page */}
               <Route path="dash" element={<DashboardPage />}>
-                <Route index element={<div>Use the menu on the left!</div>} />
+                <Route
+                  index
+                  element={
+                    <Text>
+                      👋 Hello there! Use the menu on the left so explore the
+                      dashboard
+                    </Text>
+                  }
+                />
 
                 <Route
                   path="search"
