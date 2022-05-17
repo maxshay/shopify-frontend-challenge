@@ -20,6 +20,8 @@ const getResponse = async (prompt) => {
     }
   ).then((response) => response.json());
 
+  // console.log(response);
+
   if (response.error) {
     console.log(response.error);
     return [null, response.error.message];

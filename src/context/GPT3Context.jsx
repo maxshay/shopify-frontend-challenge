@@ -7,7 +7,7 @@ const isBrowser = typeof window !== `undefined`;
 const defaultItems = [];
 
 function GTP3ContextProvider(props) {
-  const [response, setResponse] = useState();
+  const [responses, setResponses] = useState([]);
   const [history, setHistory] = useState(defaultItems);
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
@@ -22,34 +22,43 @@ function GTP3ContextProvider(props) {
     const itemsString = localStorage.getItem(localStorageKey);
     const items = JSON.parse(itemsString);
     if (items === null) {
-      localStorage.setItem(localStorageKey, JSON.stringify([item]));
+      localStorage.setItem(localStorageKey, JSON.stringify([...item]));
     } else {
-      items.push(item);
+      items.push(...item);
       localStorage.setItem(localStorageKey, JSON.stringify(items));
     }
 
     //state
     setHistory((before) => {
       const temp = [...before];
-      temp.push(item);
+      temp.push(...item);
       return temp;
     });
   };
 
   const sendPrompt = async (values) => {
+    setResponses([]);
     setLoading(true);
     const [data, error] = await myGPT3Api.completeResponse(values.prompt);
     if (error) {
       setError(error);
       setLoading(false);
     } else {
-      const newValue = {
-        id: data.id,
-        prompt: values.prompt,
-        response: data.choices[0].text,
-      };
-      setResponse(newValue);
-      updateHistory(newValue);
+      const newValues = [];
+      data.choices.forEach((choice) => {
+        newValues.push({
+          id: `${data.id}${Math.floor(Math.random() * 100000)}`,
+          prompt: values.prompt,
+          response: choice.text,
+        });
+      });
+
+      setResponses((currentResponses) => {
+        const temp = [...currentResponses];
+        temp.push(...newValues);
+        return temp;
+      });
+      updateHistory(newValues);
       // saveToHistory
       setLoading(false);
     }
@@ -65,7 +74,7 @@ function GTP3ContextProvider(props) {
   }, []);
 
   const values = {
-    response,
+    responses,
     sendPrompt,
     loading,
     history,

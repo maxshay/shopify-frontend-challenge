@@ -5,7 +5,6 @@ import HistoryList from "../components/HistoryList";
 
 const HistoryView = () => {
   const { history, clearHistory } = useContext(GTP3Context);
-
   return (
     <>
       <Group position="apart">

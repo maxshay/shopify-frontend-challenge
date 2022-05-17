@@ -29,7 +29,7 @@ const PromptForm = () => {
 
         <Group position="right" mt="md">
           <Button type="submit" loading={loading}>
-            Submit
+            {loading === true ? "Submitting" : "Submit"}
           </Button>
         </Group>
       </form>
