@@ -15,6 +15,7 @@ const WelcomePage = lazy(() => import("./pages/WelcomePage.jsx"));
 // views (smaller pages)
 const SearchView = lazy(() => import("./views/SearchView.jsx"));
 const HistoryView = lazy(() => import("./views/HistoryView.jsx"));
+const HelpView = lazy(() => import("./views/HelpView.jsx"));
 
 const Layout = () => {
   return (
@@ -59,6 +60,14 @@ const App = () => {
                   element={
                     <Suspense fallback={<Spinner />}>
                       <HistoryView />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="help"
+                  element={
+                    <Suspense fallback={<Spinner />}>
+                      <HelpView />
                     </Suspense>
                   }
                 />

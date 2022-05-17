@@ -13,6 +13,9 @@ const Nav = () => {
           <Button variant="light" component={Link} to="/dash/history">
             History
           </Button>
+          <Button variant="light" component={Link} to="/dash/help">
+            Help
+          </Button>
         </Stack>
       </Box>
     </Stack>

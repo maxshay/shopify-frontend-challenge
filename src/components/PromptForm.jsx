@@ -1,7 +1,16 @@
 import { useContext } from "react";
-import { Textarea, Button, Group, Box, Select } from "@mantine/core";
+import {
+  Textarea,
+  Button,
+  Group,
+  Box,
+  Select,
+  Text,
+  Stack,
+} from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { GTP3Context } from "../context/GPT3Context";
+import { Link } from "react-router-dom";
 
 const PromptForm = () => {
   const { sendPrompt, loading } = useContext(GTP3Context);
@@ -42,9 +51,14 @@ const PromptForm = () => {
         />
 
         <Group position="right" mt="md">
-          <Button type="submit" loading={loading}>
-            {loading === true ? "Submitting" : "Submit"}
-          </Button>
+          <Stack spacing="xs">
+            <Button type="submit" loading={loading}>
+              {loading === true ? "Submitting" : "Submit"}
+            </Button>
+            <Text size="sm">
+              Need some inspo? <Link to="/dash/help">Click here</Link>
+            </Text>
+          </Stack>
         </Group>
       </form>
     </Box>

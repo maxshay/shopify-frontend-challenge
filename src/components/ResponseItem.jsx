@@ -9,7 +9,15 @@ const ResponseItem = ({ response }) => {
           <Text weight={700}>Prompt:</Text>
         </Grid.Col>
         <Grid.Col span={9}>
-          <Text>{response.prompt}</Text>
+          <pre
+            style={{
+              margin: 0,
+              whiteSpace: "pre-wrap",
+              wordWrap: "break-word",
+            }}
+          >
+            <Text>{response.prompt}</Text>
+          </pre>
         </Grid.Col>
       </Grid>
       <div
