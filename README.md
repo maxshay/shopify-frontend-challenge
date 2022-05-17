@@ -20,7 +20,7 @@ A live demo can be found here on [Netlify](https://charming-crumble-ef08dd.netli
 - Save responses if the user leaves or reloads the page
 - Clear prompt history
 - Lets the user choose the AI engine from a select box
-- Suggests some starter prompts for the user to get started (working on it)
+- Suggests some starter prompts for the user to get started
 
 ## Clone the repo
 
