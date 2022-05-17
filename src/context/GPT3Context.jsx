@@ -30,16 +30,18 @@ function GTP3ContextProvider(props) {
 
     //state
     setHistory((before) => {
-      const temp = [...before];
-      temp.push(...item);
-      return temp;
+      const newHistory = [...item, ...before];
+      return newHistory;
     });
   };
 
   const sendPrompt = async (values) => {
     setResponses([]);
     setLoading(true);
-    const [data, error] = await myGPT3Api.completeResponse(values.prompt);
+    const [data, error] = await myGPT3Api.completeResponse(
+      values.prompt,
+      values.engine
+    );
     if (error) {
       setError(error);
       setLoading(false);
@@ -54,9 +56,8 @@ function GTP3ContextProvider(props) {
       });
 
       setResponses((currentResponses) => {
-        const temp = [...currentResponses];
-        temp.push(...newValues);
-        return temp;
+        const newState = [...currentResponses, ...newValues];
+        return newState;
       });
       updateHistory(newValues);
       // saveToHistory

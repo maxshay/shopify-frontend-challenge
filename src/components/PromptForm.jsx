@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Textarea, Button, Group, Box } from "@mantine/core";
+import { Textarea, Button, Group, Box, Select } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { GTP3Context } from "../context/GPT3Context";
 
@@ -8,6 +8,7 @@ const PromptForm = () => {
   const form = useForm({
     initialValues: {
       prompt: "",
+      engine: "text-davinci-002",
     },
 
     validate: {
@@ -19,12 +20,25 @@ const PromptForm = () => {
   return (
     <Box mt="sm">
       <form onSubmit={form.onSubmit((values) => sendPrompt(values))}>
+        <Select
+          label="Choose your engine"
+          required
+          placeholder="Pick one"
+          data={[
+            { value: "text-davinci-002", label: "Davinci 002" },
+            { value: "text-curie-001", label: "Curie 001" },
+            { value: "text-babbage-001", label: "Babbage 001" },
+            { value: "text-ada-001", label: "Ada 001" },
+          ]}
+          {...form.getInputProps("engine")}
+        />
         <Textarea
           placeholder="Ask GPT3 to finish something for you"
           required
           label="Enter Prompt"
           {...form.getInputProps("prompt")}
           minRows={4}
+          mt="sm"
         />
 
         <Group position="right" mt="md">

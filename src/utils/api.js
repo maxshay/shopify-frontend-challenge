@@ -1,4 +1,4 @@
-const getResponse = async (prompt) => {
+const getResponse = async (prompt, engine) => {
   const data = {
     prompt: prompt,
     temperature: 0.5,
@@ -9,7 +9,7 @@ const getResponse = async (prompt) => {
   };
 
   const response = await fetch(
-    "https://api.openai.com/v1/engines/text-curie-001/completions",
+    `https://api.openai.com/v1/engines/${engine}/completions`,
     {
       method: "POST",
       headers: {
@@ -31,7 +31,7 @@ const getResponse = async (prompt) => {
 };
 
 class MyGPT3Api {
-  completeResponse = (prompt) => getResponse(prompt);
+  completeResponse = (prompt, engine) => getResponse(prompt, engine);
 }
 
 const myGPT3Api = new MyGPT3Api();
